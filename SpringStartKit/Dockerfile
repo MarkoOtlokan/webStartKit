@@ -1,7 +1,4 @@
-FROM maven AS build
-WORKDIR /app
-COPY . .
-RUN mvn package
-
-FROM tomcat
-COPY --from=build /app/target/file.war /usr/local/tomcat/webapps 
+FROM openjdk:8
+ADD target/first-0.0.1-SNAPSHOT.jar first-0.0.1-SNAPSHOT.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "first-0.0.1-SNAPSHOT.jar"]
